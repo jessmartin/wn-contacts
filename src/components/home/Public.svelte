@@ -1,5 +1,14 @@
 <script lang="ts">
   import { appName } from '$lib/app-info'
+
+  import vCard from 'vcf'
+  var card = new vCard()
+  card.set('fn', 'John Doe')
+  card.set('org', 'ACME Inc.')
+  console.log(card.toString('4.0'))
+
+  var parsedCard = vCard.parse(card.toString('4.0'))
+  console.log(parsedCard)
 </script>
 
 <div
@@ -8,26 +17,24 @@
   <h1 class="text-xl">Welcome to the {appName}</h1>
 
   <div class="max-w-[590px]">
-    <p class="mb-5">
-      Webnative SDK is a true local-first edge computing stack. Effortlessly
-      give your users:
-    </p>
-
-    <ul class="mb-6 pl-6 list-disc">
-      <li>
-        <span class="font-bold">modern, passwordless accounts</span>
-        , without a complex and costly cloud-native back-end
-      </li>
-      <li>
-        <span class="font-bold">user-controlled data</span>
-        , secured by default with our encrypted-at-rest file storage protocol
-      </li>
-      <li>
-        <span class="font-bold">local-first functionality</span>
-        , including the ability to work offline and collaborate across multiple devices
-      </li>
-    </ul>
-
-    <a class="btn btn-primary btn-sm !h-10" href="/connect">Connect</a>
+    <div class="mb-4">
+      <span class="text-lg mb-4">Name</span>
+      <input
+        class="input input-bordered focus:outline-none w-full px-3 inline-block"
+        type="text"
+        name="name"
+      />
+    </div>
+    <!-- html form elements: name, organization, phone number -->
+    <div class="mb-4">
+      <span class="text-lg mb-4">Organization</span>
+      <input
+        class="input input-bordered focus:outline-none w-full px-3 inline-block"
+        type="text"
+        name="organization"
+      />
+    </div>
+    <!-- button to generate vCard -->
+    <button class="btn btn-primary">Generate vCard</button>
   </div>
 </div>
